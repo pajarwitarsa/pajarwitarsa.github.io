@@ -1,0 +1,71 @@
+#appName {    
+    margin-bottom: 20px;
+    color: white;
+    font-family: 'Ubuntu';
+    
+ 
+}
+
+.main {
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.button {   
+    margin-top: 20px;    
+}
+
+.addNewToDo {  
+    text-align: center;
+}
+
+.addNewToDo input {
+    padding: 10px;
+}
+
+.listToDo  {   
+    text-align: left;
+    width: auto;
+    margin-top: 20px;
+    background-color: wheat;
+    font-family: 'Ubuntu';
+    font-weight: bold;
+    font-size: 20px;
+    
+}
+
+.toDoTable {
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+.toDoTable td {
+    border-bottom: 1px dashed;
+}
+
+
+
+.buttonDone, .buttonDel {
+    background-color: transparent;
+    border: none;
+}
+
+.buttonDel img {
+    height: 20px;
+}
+
+.buttonDone img {
+    height: 20px;
+}
+  
+  
