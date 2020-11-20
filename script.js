@@ -7,42 +7,77 @@ function myFunction() {
         return alert('Form tidak boleh kosong');
     }
     let table = document.getElementById("toDoTable"); 
-    let i = table.rows.length;
-    let row = table.insertRow(i);
-    let cell1 = row.insertCell(0);
-    let cell2 = row.insertCell(1);
-    let cell3 = row.insertCell(2);
-    let cell4 = row.insertCell(3);
-    cell1.innerHTML =  i+1+'.';
-    cell2.innerHTML =  toDo;
-    cell3.innerHTML =  `<button class="buttonDone"><img src="https://img.icons8.com/doodle/192/000000/checkmark.png" /></button>`;
-    cell4.innerHTML =  `<button class="buttonDel"><img src="https://img.icons8.com/doodle/48/000000/delete-sign.png"/></button>`;
+    let idx = table.rows.length;
+    let isiTd = [idx + 1 + '.', 
+                toDo, 
+                `<button class="buttonDone"><img src="https://img.icons8.com/doodle/192/000000/checkmark.png" /></button>`,
+                `<button class="buttonDel"><img src="https://img.icons8.com/doodle/48/000000/delete-sign.png"/></button>`
+                ]
+    insertRow(table, idx, isiTd);
+   
     document.getElementById("toDo").value = '';
     document.getElementById("listToDo").style.display='block';
-    done(i);
+    
 
 }
 
-function done(i) {
+function insertRow(table, idx, isiTd){
+
+    let row = table.insertRow(idx);
+    for (let i = 0; i < isiTd.length; i++) {
+        let cell = row.insertCell(i);
+        cell.innerHTML = isiTd[i];        
+    }
+    done(idx);
+    del(idx);
+}
+
+function done(idx) {
     let btnDone = document.getElementsByClassName("buttonDone");
-    btnDone[i].addEventListener("click", function() {       
+    btnDone[idx].addEventListener("click", function() {       
         let toDoTable = document.getElementById("toDoTable")
-        let textDecor = toDoTable.rows[i].style.textDecoration;
+        let textDecor = toDoTable.rows[idx].style.textDecoration;
         if (!textDecor || textDecor === 'none') {
-            toDoTable.rows[i].style.textDecoration = "line-through"; 
+            toDoTable.rows[idx].style.textDecoration = "line-through"; 
         } else {
-            toDoTable.rows[i].style.textDecoration = "none";
+            toDoTable.rows[idx].style.textDecoration = "none";
         }        
     });
    
-  }
-  
- 
+}
 
+function del(idx) {
+    let btnDel = document.getElementsByClassName("buttonDel");
+    btnDel[idx].addEventListener("click", function() {       
+        let table = document.getElementById("toDoTable");         
+        let length = table.rows.length;
+        let newArr = [];
+        let newStr = '';
+        for (let i = 0; i < length; i++) {
+            if (i !== idx) {
+                let str = table.rows[i].textContent;   
+                for (let j = 2; j < str.length; j++) {
+                    newStr += str[j];
+                } 
+                newArr.push(newStr);
+                newStr = '';  
+            }            
+        } 
+        if (newArr.length === 0) {
+            document.getElementById("listToDo").style.display='none';
+        }       
+        for (let i = 0; i < length; i++) {
+            table.deleteRow(0);            
+        }
+        for (let i = 0; i < newArr.length; i++) {
+            let isiTd = [i + 1 + '.', 
+            newArr[i], 
+                `<button class="buttonDone"><img src="https://img.icons8.com/doodle/192/000000/checkmark.png" /></button>`,
+                `<button class="buttonDel"><img src="https://img.icons8.com/doodle/48/000000/delete-sign.png"/></button>`
+                ]
+            insertRow(table, i, isiTd);
+        }
+        
+    });
+}
 
-    
-    
-    
-  
-let btnDne = document.getElementById("btnDne");
-console.log(btnDne);
